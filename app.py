@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request
 from decouple import config
+import random
 import requests
+
+
+
+
 
 app = Flask(__name__)
 
@@ -28,10 +33,24 @@ def send():
 
 @app.route(f'/{token}', methods=["POST"])
 def telegram():
-    chat_id = request.get_json.[][][] #나에게 메세지를 보낸 상대방의 아이디를 입력하는 방법. 
-    if text == "로또"
+    data = request.get_json()
+    chat_id = data['message']['chat']['id']
+    text = data['message']['text']
+    
+    if text == "안녕":
+        return_text = "안녕하세요"
+    elif "로또" in text:
+        numbers = range(1,46)
+        return_text = sorted(random.sample(numbers, 6))
+    
+    
+    else : 
+        return_text = "지금 지원하는 채팅은 안녕입니다."
+    
+    
+    requests.get(f'{url}{token}/sendmessage?chat_id={chat_id}&text={return_text}')
     return "ok", 200  #웹에게 잘 전송했다는 뜻 한 번의 메세지에 한 번의 응답.  200이 안되어있으면 똑같은 메세지가 계속 보내지게 됨.
-
+    
 
 if __name__ == ("__main__"):
     app.run(debug=True)
