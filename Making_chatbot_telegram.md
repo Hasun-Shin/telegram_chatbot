@@ -104,7 +104,7 @@ app = Flask(__name__)
 
 #token 은 나의 bot id
 #chat_id 는 나(사람)의 id
-token =config("TELEGRAM_BOT_TOKEN") #.env 파일에 있는 변수 
+token =config("TELEGRAM_BOT_TOKEN") #.env 파일에 있는 변수 . 내 정보를 숨겨줌. 
 chat_id =config("CHAT_ID") #.env 파일에 있는 변수 
 
 
@@ -122,8 +122,8 @@ def write():
 
 @app.route('/send')
 def send():
-    text = request.args.get('text') #'text' 는 write.html 의 name!
-    requests.get(f'{url}{token}/sendmessage?chat_id={chat_id}&text={text}')
+    text = request.args.get('text') #'text' 는 write.html 의 name! 요청하기
+    requests.get(f'{url}{token}/sendmessage?chat_id={chat_id}&text={text}') # 요청한 것에 대한 응답받기 
     return render_template('send.html')
 
 
@@ -152,3 +152,14 @@ if __name__ == ("__main__"):
 </html>
 ```
 
+-----------------
+
+## git hub 에 올리기
+
+1. git init : 현재 작업하고 있는 telegram_chatbot 폴더
+
+git hub에 새 저장소 생성(telegram_chatbot)
+
+git ignore.io 에서 windows, Flask, Python, (가상환경작동하고 있으면)venv, visualstudiocode.
+
+vs code 에서 복붙하여 .
